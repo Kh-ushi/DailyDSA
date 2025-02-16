@@ -1,2 +1,3 @@
 2967. Minimum Cost to Make Array Equalindromic
-2444. Count Subarrays With Fixed Bounds
+2261. K Divisible Elements Subarrays (already solved using sliding window)
+need to be solved with tries to reduce the time complexity from o(n^3) to O(n^2)
