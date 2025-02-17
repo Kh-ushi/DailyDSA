@@ -76,3 +76,59 @@ class Solution {
         return count * 2;
     }
 }
+
+// 1323. Maximum 69 Number
+
+class Solution {
+    public int maximum69Number(int num) {
+        int place = 0;
+        int maxPlaceValue = -1; 
+
+        int temp = num; 
+
+        while (temp != 0) {
+            int digit = temp % 10;
+            if (digit == 6) {
+                maxPlaceValue = place; 
+            }
+            temp /= 10; 
+            place++;
+        }
+
+        if (maxPlaceValue == -1) {
+            return num; 
+        }
+
+        return num + 3 * (int) Math.pow(10, maxPlaceValue);
+    }
+}
+
+
+// 2279. Maximum Bags With Full Capacity of Rocks
+class Solution {
+    public int maximumBags(int[] capacity, int[] rocks, int additionalRocks) {
+
+        int remainingCapacity[]=new int[capacity.length];
+        for(int i=0;i<capacity.length;i++)
+        {
+            remainingCapacity[i]=capacity[i]-rocks[i];
+        }
+          
+          int maxBags=0;
+
+        Arrays.sort( remainingCapacity);
+        for(int i=0;i<remainingCapacity.length;i++){
+            if(additionalRocks>=remainingCapacity[i]){
+                additionalRocks-=remainingCapacity[i];
+                maxBags++;
+            }
+
+            if(additionalRocks==0){
+              break;
+            }
+        }
+
+         return maxBags;
+        
+    }
+}
