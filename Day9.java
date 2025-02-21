@@ -132,3 +132,82 @@ class Solution {
         
     }
 }
+
+
+//1833. Maximum Ice Cream Bars
+class Solution {
+    public int maxIceCream(int[] costs, int coins) {
+        
+        int largest=Integer.MIN_VALUE;
+
+        for(int cost:costs){
+          largest=Math.max(largest,cost);
+        }
+
+        int count[]=new int[largest+1];
+        for(int cost:costs){
+            count[cost]++;
+        }
+
+        int maxBars=0;
+
+        for(int i=0;i<count.length;i++){
+            
+            if(count[i]==0){
+                continue;
+            }
+            
+            while(coins>=i && count[i]>0){
+                coins-=i;
+                maxBars++;
+                count[i]--;
+            }
+
+            if(coins==0){
+                break;
+            }
+
+        }
+
+        return maxBars;
+
+    }
+} 
+
+
+// 134. Gas Station
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        
+        int totalGas=0;
+        for(int i=0;i<gas.length;i++){
+            totalGas+=gas[i];
+        }
+
+        int totalCost=0;
+        for(int j=0;j<cost.length;j++){
+            totalCost+=cost[j];
+        }
+
+        if(totalGas<totalCost){
+            return -1;
+        }
+
+        int total=0;
+        int result=0;
+
+        for(int i=0;i<gas.length;i++){
+            total+=gas[i]-cost[i];
+
+            if(total<0){
+                total=0;
+                result=i+1;
+            }
+        }
+
+       return result;
+
+    }
+}
+
+// DAY
