@@ -183,3 +183,141 @@ class Solution {
 
 
 // ---------------------------------------------------------------------------------------------------
+
+// 443. String Compression
+class Solution {
+    public int compress(char[] chars) {
+        
+        StringBuilder sb=new StringBuilder("");
+        
+        int idx=0;
+        while(idx<chars.length){
+          
+          Integer count=1;
+          while(idx<chars.length-1 && chars[idx]==chars[idx+1]){
+             count++;
+             idx++;
+          }
+          sb.append(chars[idx]);
+
+          if(count>1){
+            sb.append(count);
+          }
+          
+          idx++;
+
+        }
+
+         String str=sb.toString();
+
+        for(int i=0;i<str.length();i++){
+            chars[i]=str.charAt(i);
+        }
+
+
+        return str.length();
+         
+    }
+}
+
+// 1832. Check if the Sentence Is Pangram
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+
+      HashSet<Character>set=new HashSet<>();    
+
+      for(char ch='a';ch<='z';ch++){
+        set.add(ch);
+      }
+
+      for(int i=0;i<sentence.length();i++){
+        char ch=sentence.charAt(i);
+        if(set.contains(ch)){
+            set.remove(ch);
+        }
+
+        if(set.size()==0){
+            return true;
+        }
+      }
+
+      return false;
+
+    }
+}
+
+
+// 38. Count and Say
+class Solution {
+    public String countAndSay(int n) {
+
+        if (n == 1) {
+            return "1";
+        }
+
+        String ans = countAndSay(n - 1);
+
+        StringBuilder sb = new StringBuilder("");
+        int idx = 0;
+        while (idx < ans.length()) {
+
+            Integer count = 1;
+            while (idx < ans.length() - 1 && ans.charAt(idx) == ans.charAt(idx + 1)) {
+                idx++;
+                count++;
+            }
+            sb.append(count);
+            sb.append(ans.charAt(idx));
+            idx++;
+        }
+
+        return sb.toString();
+
+    }
+}
+
+// 12. Integer to Roman
+
+class Solution {
+    List<Integer> val = Arrays.asList(1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000);
+  List<String> roman = Arrays.asList("I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M");
+
+  public String intToRoman(int num) {
+      StringBuilder sb = new StringBuilder();
+      int idx = val.size() - 1;
+
+      while (num != 0) {
+          while (idx >= 0 && num < val.get(idx)) {
+              idx--;
+          }
+
+          int count = num / val.get(idx);
+          num %= val.get(idx);
+          String str = roman.get(idx);
+          
+          for (int i = 0; i < count; i++) {
+              sb.append(str);
+          }
+      }
+
+      return sb.toString();
+  }
+}
+
+// 662. Check If Two String Arrays are Equivalent
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+         
+         StringBuilder sb1=new StringBuilder("");
+         for(String str:word1){
+            sb1.append(str);
+         }
+
+         StringBuilder sb2=new StringBuilder("");
+         for(String str:word2){
+            sb2.append(str);
+         }
+
+         return sb1.toString().equals(sb2.toString());
+    }
+}
