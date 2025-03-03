@@ -188,3 +188,79 @@ class Solution {
         return maxSum;
     }
 }
+
+// 445. Add Two Numbers II
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        Stack<Integer>s1=new Stack<>();
+        Stack<Integer>s2=new Stack<>();
+
+        ListNode temp=l1;
+        while(temp!=null){
+            s1.push(temp.val);
+            temp=temp.next;
+        }
+
+        temp=l2;
+        while(temp!=null){
+            s2.push(temp.val);
+            temp=temp.next;
+        }
+
+        // MAIN LOGIC
+        int sum=0;
+        int carry=0;
+        ListNode ans=new ListNode();
+
+        while(!s1.isEmpty() || !s2.isEmpty()){
+            
+            if(!s1.isEmpty()){
+                sum+=s1.pop();
+            }
+
+            if(!s2.isEmpty()){
+                sum+=s2.pop();
+            }
+
+            ans.val=sum%10;
+            carry=sum/10;
+
+            ListNode newNode=new ListNode(carry);
+            newNode.next=ans;
+            ans=newNode;
+            sum=carry;
+        }
+
+          return carry==0?ans.next:ans;
+        
+    }
+}
+
+
+
+// 86. Partition List
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode beforeHead = new ListNode(0); 
+        ListNode before = beforeHead;
+        ListNode afterHead = new ListNode(0);  
+        ListNode after = afterHead;
+
+        while (head != null) {
+            if (head.val < x) {
+                before.next = head;  
+                before = before.next;
+            } else {
+                after.next = head;   
+                after = after.next;
+            }
+            head = head.next;
+        }
+
+        after.next = null;  
+        before.next = afterHead.next; 
+
+        return beforeHead.next; 
+    }
+}
