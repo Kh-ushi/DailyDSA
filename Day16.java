@@ -202,4 +202,51 @@ class Solution {
     }
 }
 
-// 
+// 1347. Minimum Number of Steps to Make Two Strings Anagram
+
+class Solution {
+    public int minSteps(String s, String t) {
+
+        int list[] = new int[26];
+
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            list[ch - 'a']++;
+        }
+
+      
+        for (int i = 0; i < t.length(); i++) {
+            char ch = t.charAt(i);
+            list[ch - 'a'] = Math.max(0, list[ch - 'a'] - 1);
+        }
+
+        
+        int sum = 0;
+        for (int i = 0; i < 26; i++) {  
+            sum += list[i];
+        }
+
+        return sum;
+    }
+}
+
+
+// 944. Delete Columns to Make Sorted
+
+class Solution {
+    public int minDeletionSize(String[] strs) {
+        int count=0;
+        for(int i=0;i<strs[0].length();i++){
+
+            for(int j=1;j<strs.length;j++){
+
+                if(strs[j].charAt(i)<strs[j-1].charAt(i)){
+                    count++;break;
+                }
+            }
+        }
+
+       return count;
+    }
+}
